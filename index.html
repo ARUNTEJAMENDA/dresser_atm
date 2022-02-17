@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Dresser | aruntejamenda</title>
+        <meta name="viewport" content="width=device-width, initial-scale =1"/>
+        <script src="jquery.js"></script>
+        <style>
+            html{
+                height: 100vh;
+                width: 100vw;
+                margin:0;
+                padding: 0;
+            }
+            body{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                margin: 0;
+                padding:0;
+                height: 100vh;
+                width: 100vw;
+            }
+            #shirt{
+                aspect-ratio: 469/668;
+                width: 250px;
+                z-index: 1;
+                background-color:aqua;
+            }
+            #pant{
+                margin: -37px 0 0 0;
+                aspect-ratio: 469/436;
+                width: 250px;
+                background-color:red;
+            }
+            @media screen and (max-width<500px){
+                img{
+                    all:unset !important;
+                }
+                body{
+                    height: 100vh;
+                    width: 100vw;                  
+                }
+                #shirt{
+                    width:90vw;
+                }
+                #pant{
+                    width:90vw;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <img src="shirt.png" alt="shirt" id="shirt" >
+        <input style="position: absolute;left:60%;top:40%;z-index: 3;" type="file"  accept="image/gif, image/jpeg, image/png" name="image" id="filetag_s" />
+        <!--  -->
+        <img src="pant.png" alt="pant" id="pant" >
+        <input style="position: absolute;left:60%;top:80%;z-index: 3;" type="file"  accept="image/gif, image/jpeg, image/png" name="image" id="filetag_p" />
+        <script>
+            var s_fileTag = document.getElementById("filetag_s"),
+            p_fileTag = document.getElementById("filetag_p"),
+            s_preview = document.getElementById("shirt"),
+            p_preview = document.getElementById("pant");
+            s_fileTag.addEventListener("change", function() {
+                changeImage_s(this);
+            });
+            p_fileTag.addEventListener("change", function() {
+                changeImage_p(this);
+            });
+            function changeImage_s(input) {
+                var reader;
+                if (input.files && input.files[0]) {
+                    reader = new FileReader();
+                    reader.onload = function(e) {
+                        $("#shirt").css("background-image", "url('" + e.target.result + "')");
+                        $("#shirt").css("background-position","center");
+                        $("#shirt").css("background-size","cover");
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+            function changeImage_p(input) {
+                var reader;
+                if (input.files && input.files[0]) {
+                    reader = new FileReader();
+                    reader.onload = function(e) {
+                        $("#pant").css("background-image", "url('" + e.target.result + "')");
+                        $("#pant").css("background-position","center");
+                        $("#pant").css("background-size","cover");
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+        </script>
+    </body>
+</html>
